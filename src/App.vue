@@ -17,6 +17,7 @@
   </main> -->
 
   <router-link to="/">Home</router-link>
+  <router-link to="/declarative-rendering">Declarative Rendering</router-link>
   <router-view />
 
 </template>
