@@ -15,9 +15,13 @@
   <main>
     <TheWelcome />
   </main> -->
+
+  <router-link to="/">Home</router-link>
+  <router-view />
+
 </template>
 
-<style scoped>
+<!-- <style scoped>
 /* header {
   line-height: 1.5;
 }
@@ -44,4 +48,4 @@
     flex-wrap: wrap;
   }
 } */
-</style>
+</style> -->
