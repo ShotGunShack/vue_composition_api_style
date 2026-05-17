@@ -4,6 +4,7 @@ import Declarative from '@/components/Declarative.vue';
 import AttributeBinding from '@/components/AttributeBinding.vue';
 import EventListener from '@/components/EventListener.vue';
 import TwoWayBindings from '@/components/TwoWayBindings.vue';
+import ConditionnalRendering from '@/components/ConditionnalRendering.vue';
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         path: '/two-way-bindings',
         name: 'Two Way Bindings',
         component: TwoWayBindings
+    },
+    {
+        path: '/conditionnal-rendering',
+        name: 'Conditionnal Rendering',
+        component: ConditionnalRendering
     }
 ];
 
