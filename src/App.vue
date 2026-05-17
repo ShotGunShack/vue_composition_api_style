@@ -20,6 +20,7 @@
   <router-link to="/declarative-rendering">Declarative Rendering</router-link>
   <router-link to="/attribute-binding">Attribute Binding</router-link>
   <router-link to="/event-listeners">Event Listeners</router-link>
+  <router-link to="/two-way-bindings">Two Way Bindings</router-link>
   <router-view />
 
 </template>

@@ -3,6 +3,7 @@ import Home from '@/components/Home.vue';
 import Declarative from '@/components/Declarative.vue';
 import AttributeBinding from '@/components/AttributeBinding.vue';
 import EventListener from '@/components/EventListener.vue';
+import TwoWayBindings from '@/components/TwoWayBindings.vue';
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/event-listeners',
         name: 'Event Listners',
         component: EventListener
+    },
+    {
+        path: '/two-way-bindings',
+        name: 'Two Way Bindings',
+        component: TwoWayBindings
     }
 ];
 
