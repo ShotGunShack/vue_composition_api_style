@@ -57,58 +57,58 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+    import { ref, computed } from 'vue';
 
-const todoId = ref(0);
-const newTask = ref(null);
-const newTaskErrMsg = ref("");
-const newTaskErrMsgClass = ref("");
-const isNewTaskEmpty = ref(false);
-const todos = ref( [
-    { id: ++todoId.value, text: 'Explore Vue used through CDN', isCompleted : true},
-    { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : true },
-    { id: ++todoId.value, text: 'Explore Vue used through Vite', isCompleted : false },
-    { id: ++todoId.value, text: 'Explore Vue used through Composition API', isCompleted : false },
-    { id: ++todoId.value, text: 'Explore Vue SPA', isCompleted : false },
-    { id: ++todoId.value, text: 'Explore Vue SFC', isCompleted : false }
-]);
+    const todoId = ref(0);
+    const newTask = ref(null);
+    const newTaskErrMsg = ref("");
+    const newTaskErrMsgClass = ref("");
+    const isNewTaskEmpty = ref(false);
+    const todos = ref( [
+        { id: ++todoId.value, text: 'Explore Vue used through CDN', isCompleted : true},
+        { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : true },
+        { id: ++todoId.value, text: 'Explore Vue used through Vite', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue used through Composition API', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue SPA', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue SFC', isCompleted : false }
+    ]);
 
-const addTask = () => {
-    if (!newTask.value || !newTask.value.trim()) {
-        isNewTaskEmpty.value = true;
-        newTaskErrMsg.value = "Task cannot be empty";
-        newTaskErrMsgClass.value = "errorTaskMsg";
-        return;
+    const addTask = () => {
+        if (!newTask.value || !newTask.value.trim()) {
+            isNewTaskEmpty.value = true;
+            newTaskErrMsg.value = "Task cannot be empty";
+            newTaskErrMsgClass.value = "errorTaskMsg";
+            return;
+        }
+
+        // Reset error state
+        isNewTaskEmpty.value = false;
+        newTaskErrMsg.value = undefined;
+        newTaskErrMsgClass.value = undefined;
+
+        todos.value.push({
+            id: ++todoId.value,
+            text: newTask.value.trim()
+        });
+
+        //Reset input value
+        newTask.value = null;
     }
 
-    // Reset error state
-    isNewTaskEmpty.value = false;
-    newTaskErrMsg.value = undefined;
-    newTaskErrMsgClass.value = undefined;
-
-    todos.value.push({
-        id: ++todoId.value,
-        text: newTask.value.trim()
-    });
-
-    //Reset input value
-    newTask.value = null;
-}
-
-const removeTask = (id) => {
-    todos.value = todos.value.filter(todo =>{ 
-        return todo.id !== id;
-    });
-}
-
-const hideCompletedTasks = ref(false);
-const computedTasks = computed(() => {
-    console.log("Is completed tasks hidden button clicked : "+hideCompletedTasks.value);
-    if(hideCompletedTasks.value) {
-        return todos.value.filter(t => !t.isCompleted);
+    const removeTask = (id) => {
+        todos.value = todos.value.filter(todo =>{ 
+            return todo.id !== id;
+        });
     }
-    return todos.value;
-});
+
+    const hideCompletedTasks = ref(false);
+    const computedTasks = computed(() => {
+        console.log("Is completed tasks hidden button clicked : "+hideCompletedTasks.value);
+        if(hideCompletedTasks.value) {
+            return todos.value.filter(t => !t.isCompleted);
+        }
+        return todos.value;
+    });
 </script>
 
 <style>
