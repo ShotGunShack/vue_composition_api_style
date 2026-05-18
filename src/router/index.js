@@ -7,6 +7,7 @@ import TwoWayBindings from '@/components/TwoWayBindings.vue';
 import ConditionnalRendering from '@/components/ConditionnalRendering.vue';
 import ListRendering from '@/components/ListRendering.vue';
 import LifeCycleTemplateRef from '@/components/LifeCycleTemplateRef.vue';
+import Watcher from '@/components/Watcher.vue';
 
 const routes = [
     {
@@ -48,6 +49,11 @@ const routes = [
         path: '/lifecycle-template-ref',
         name: 'Lifecycle Template Ref',
         component: LifeCycleTemplateRef
+    },
+    {
+        path: '/watcher',
+        name: 'Watcher',
+        component: Watcher
     }
 ];
 
