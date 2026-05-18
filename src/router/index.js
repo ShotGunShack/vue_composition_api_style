@@ -5,6 +5,7 @@ import AttributeBinding from '@/components/AttributeBinding.vue';
 import EventListener from '@/components/EventListener.vue';
 import TwoWayBindings from '@/components/TwoWayBindings.vue';
 import ConditionnalRendering from '@/components/ConditionnalRendering.vue';
+import ListRendering from '@/components/ListRendering.vue';
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         path: '/conditionnal-rendering',
         name: 'Conditionnal Rendering',
         component: ConditionnalRendering
+    },
+    {
+        path: '/list-rendering',
+        name: 'List Rendering',
+        component: ListRendering
     }
 ];
 
