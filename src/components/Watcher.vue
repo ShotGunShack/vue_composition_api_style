@@ -7,10 +7,17 @@
         <button @click="++taskId">Next Task</button>
         <button @click="--taskId">Previous Task</button>
         <div>
-            <span>Crrently viewed item : {{ taskId }}</span>
+            <span>Currently viewed item : {{ taskId }}</span>
             <pre v-if="!record && httpStatus === undefined">No selected item</pre>
             <pre v-else-if="httpStatus === 404 || httpStatus === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
             <pre v-else>{{ record }}</pre>
+        </div>
+
+        <h2>Simplified use of watchers</h2>
+        <div>
+            <span>Currently viewed item : {{ taskId }}</span>
+            <pre v-if="!record2">No selected item</pre>
+            <pre v-else>{{ record2 }}</pre>
         </div>
     </div>
 
@@ -24,6 +31,7 @@
 
     const records = ref (null);
     const record = ref (null);
+    const record2 = ref (null);
     const recordsSize = ref (0);
     const taskId = ref (0);
     const recordNotFoundErrMsg = ref(null);
@@ -66,11 +74,17 @@
                     recordNotFoundErrMsg.value = "Error fetching record for id : "+id;
                 }  
                 record.value = null;
-            } 
+            }
 
+            
         }); 
         
     };
+
+    async function getRecordById2() {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${taskId.value}`);
+        record2.value = await response.json();
+    }
 
     const loopThroughObjectProperty = (obj) => {
         const objectType = Object.prototype.toString.call(obj).split(' ')[1].slice(0, -1);
@@ -91,7 +105,7 @@
     watch(taskId, (newVal, oldVal) => {
         console.log('Watcher taskId : new value : '+newVal+" <=> old value : "+oldVal);
         getRecordById(newVal);
-    });
+        getRecordById2();    });
 
 </script>
 
