@@ -3,7 +3,8 @@
     <h2>Tasks list</h2>
     <ol>
         <li v-for="todo in todos" :key="todo.id">
-            {{ todo.text }} {{ todo.text.length }}  <!--=> {{ todo.id }} -->
+            <input type="checkbox" v-model="todo.isCompleted" />
+            <span :class="{strikeThrough : todo.isCompleted}" >{{ todo.text }}</span>  <!--=> {{ todo.id }} -->
             <button @click="removeTask(todo.id)">Remove task</button>
         </li>
     </ol>
@@ -31,7 +32,7 @@
             <span style="color:#9ECBFF;">'Bar'</span><span style="color:#E1E4E8;"> }])</span>
         </code>
     </div>
-
+    <br/>
     <div class="code">
         <code>
             <span style="color:#E1E4E8;">&lt;</span>
@@ -61,12 +62,12 @@ const newTaskErrMsg = ref("");
 const newTaskErrMsgClass = ref("");
 const isNewTaskEmpty = ref(false);
 const todos = ref( [
-    { id: ++todoId.value, text: 'Explore Vue used through CDN' },
-    { id: ++todoId.value, text: 'Explore Vue used through Options API' },
-    { id: ++todoId.value, text: 'Explore Vue used through Vite' },
-    { id: ++todoId.value, text: 'Explore Vue used through Composition API' },
-    { id: ++todoId.value, text: 'Explore Vue SPA' },
-    { id: ++todoId.value, text: 'Explore Vue SFC' }
+    { id: ++todoId.value, text: 'Explore Vue used through CDN', isCompleted : true},
+    { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : false },
+    { id: ++todoId.value, text: 'Explore Vue used through Vite', isCompleted : false },
+    { id: ++todoId.value, text: 'Explore Vue used through Composition API', isCompleted : false },
+    { id: ++todoId.value, text: 'Explore Vue SPA', isCompleted : false },
+    { id: ++todoId.value, text: 'Explore Vue SFC', isCompleted : false }
 ]);
 
 const addTask = () => {
@@ -112,5 +113,8 @@ const removeTask = (id) => {
     input {
         margin: 5px;
         padding: 5px;
+    }
+    .strikeThrough {
+        text-decoration: line-through;
     }
 </style>
