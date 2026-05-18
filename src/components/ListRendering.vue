@@ -2,7 +2,7 @@
     <h1>List Rendering</h1>
     <h2>Tasks list</h2>
     <ol>
-        <li v-for="todo in todos" :key="todo.id">
+        <li v-for="todo in computedTasks" :key="todo.id">
             <input type="checkbox" v-model="todo.isCompleted" />
             <span :class="{strikeThrough : todo.isCompleted}" >{{ todo.text }}</span>  <!--=> {{ todo.id }} -->
             <button @click="removeTask(todo.id)">Remove task</button>
@@ -14,6 +14,9 @@
 
     <div>
         <button @click="addTask">Add task</button>
+        <button @click="hideCompletedTasks = !hideCompletedTasks">
+            {{ hideCompletedTasks ? 'Show all' : 'Hide completed' }}
+        </button>
     </div>
 
     <h2>List Rendering Definition</h2>
@@ -54,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const todoId = ref(0);
 const newTask = ref(null);
@@ -63,7 +66,7 @@ const newTaskErrMsgClass = ref("");
 const isNewTaskEmpty = ref(false);
 const todos = ref( [
     { id: ++todoId.value, text: 'Explore Vue used through CDN', isCompleted : true},
-    { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : false },
+    { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : true },
     { id: ++todoId.value, text: 'Explore Vue used through Vite', isCompleted : false },
     { id: ++todoId.value, text: 'Explore Vue used through Composition API', isCompleted : false },
     { id: ++todoId.value, text: 'Explore Vue SPA', isCompleted : false },
@@ -97,6 +100,15 @@ const removeTask = (id) => {
         return todo.id !== id;
     });
 }
+
+const hideCompletedTasks = ref(false);
+const computedTasks = computed(() => {
+    console.log("Is completed tasks hidden button clicked : "+hideCompletedTasks.value);
+    if(hideCompletedTasks.value) {
+        return todos.value.filter(t => !t.isCompleted);
+    }
+    return todos.value;
+});
 </script>
 
 <style>
