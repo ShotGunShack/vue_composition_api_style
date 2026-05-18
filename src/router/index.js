@@ -6,6 +6,7 @@ import EventListener from '@/components/EventListener.vue';
 import TwoWayBindings from '@/components/TwoWayBindings.vue';
 import ConditionnalRendering from '@/components/ConditionnalRendering.vue';
 import ListRendering from '@/components/ListRendering.vue';
+import LifeCycleTemplateRef from '@/components/LifeCycleTemplateRef.vue';
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/list-rendering',
         name: 'List Rendering',
         component: ListRendering
+    },
+    {
+        path: '/lifecycle-template-ref',
+        name: 'Lifecycle Template Ref',
+        component: LifeCycleTemplateRef
     }
 ];
 
