@@ -2,8 +2,9 @@
     <h1>List Rendering</h1>
     <h2>Tasks list</h2>
     <ol>
-        <li v-for="todo in todos" :key="todo.id">
-            {{ todo.text }} {{ todo.text.length }}  <!--=> {{ todo.id }} -->
+        <li v-for="todo in computedTasks" :key="todo.id">
+            <input type="checkbox" v-model="todo.isCompleted" />
+            <span :class="{strikeThrough : todo.isCompleted}" >{{ todo.text }}</span>  <!--=> {{ todo.id }} -->
             <button @click="removeTask(todo.id)">Remove task</button>
         </li>
     </ol>
@@ -13,6 +14,9 @@
 
     <div>
         <button @click="addTask">Add task</button>
+        <button @click="hideCompletedTasks = !hideCompletedTasks">
+            {{ hideCompletedTasks ? 'Show all' : 'Hide completed' }}
+        </button>
     </div>
 
     <h2>List Rendering Definition</h2>
@@ -31,7 +35,7 @@
             <span style="color:#9ECBFF;">'Bar'</span><span style="color:#E1E4E8;"> }])</span>
         </code>
     </div>
-
+    <br/>
     <div class="code">
         <code>
             <span style="color:#E1E4E8;">&lt;</span>
@@ -53,49 +57,58 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+    import { ref, computed } from 'vue';
 
-const todoId = ref(0);
-const newTask = ref(null);
-const newTaskErrMsg = ref("");
-const newTaskErrMsgClass = ref("");
-const isNewTaskEmpty = ref(false);
-const todos = ref( [
-    { id: ++todoId.value, text: 'Explore Vue used through CDN' },
-    { id: ++todoId.value, text: 'Explore Vue used through Options API' },
-    { id: ++todoId.value, text: 'Explore Vue used through Vite' },
-    { id: ++todoId.value, text: 'Explore Vue used through Composition API' },
-    { id: ++todoId.value, text: 'Explore Vue SPA' },
-    { id: ++todoId.value, text: 'Explore Vue SFC' }
-]);
+    const todoId = ref(0);
+    const newTask = ref(null);
+    const newTaskErrMsg = ref("");
+    const newTaskErrMsgClass = ref("");
+    const isNewTaskEmpty = ref(false);
+    const todos = ref( [
+        { id: ++todoId.value, text: 'Explore Vue used through CDN', isCompleted : true},
+        { id: ++todoId.value, text: 'Explore Vue used through Options API', isCompleted : true },
+        { id: ++todoId.value, text: 'Explore Vue used through Vite', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue used through Composition API', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue SPA', isCompleted : false },
+        { id: ++todoId.value, text: 'Explore Vue SFC', isCompleted : false }
+    ]);
 
-const addTask = () => {
-    if (!newTask.value || !newTask.value.trim()) {
-        isNewTaskEmpty.value = true;
-        newTaskErrMsg.value = "Task cannot be empty";
-        newTaskErrMsgClass.value = "errorTaskMsg";
-        return;
+    const addTask = () => {
+        if (!newTask.value || !newTask.value.trim()) {
+            isNewTaskEmpty.value = true;
+            newTaskErrMsg.value = "Task cannot be empty";
+            newTaskErrMsgClass.value = "errorTaskMsg";
+            return;
+        }
+
+        // Reset error state
+        isNewTaskEmpty.value = false;
+        newTaskErrMsg.value = undefined;
+        newTaskErrMsgClass.value = undefined;
+
+        todos.value.push({
+            id: ++todoId.value,
+            text: newTask.value.trim()
+        });
+
+        //Reset input value
+        newTask.value = null;
     }
 
-    // Reset error state
-    isNewTaskEmpty.value = false;
-    newTaskErrMsg.value = undefined;
-    newTaskErrMsgClass.value = undefined;
+    const removeTask = (id) => {
+        todos.value = todos.value.filter(todo =>{ 
+            return todo.id !== id;
+        });
+    }
 
-    todos.value.push({
-        id: ++todoId.value,
-        text: newTask.value.trim()
+    const hideCompletedTasks = ref(false);
+    const computedTasks = computed(() => {
+        console.log("Is completed tasks hidden button clicked : "+hideCompletedTasks.value);
+        if(hideCompletedTasks.value) {
+            return todos.value.filter(t => !t.isCompleted);
+        }
+        return todos.value;
     });
-
-    //Reset input value
-    newTask.value = null;
-}
-
-const removeTask = (id) => {
-    todos.value = todos.value.filter(todo =>{ 
-        return todo.id !== id;
-    });
-}
 </script>
 
 <style>
@@ -112,5 +125,8 @@ const removeTask = (id) => {
     input {
         margin: 5px;
         padding: 5px;
+    }
+    .strikeThrough {
+        text-decoration: line-through;
     }
 </style>
