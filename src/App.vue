@@ -23,7 +23,9 @@
   <router-link to="/two-way-bindings">Two Way Bindings</router-link>
   <router-link to="/conditionnal-rendering">Conditionnal Rendering</router-link>
   <router-link to="/list-rendering">List Rendering</router-link>
+  <router-link to="/lifecycle-template-ref">Lifecycle Template Ref</router-link>
   <router-view />
+
 
 </template>
 
