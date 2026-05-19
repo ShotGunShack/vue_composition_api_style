@@ -24,6 +24,7 @@
   <router-link to="/conditionnal-rendering">Conditionnal Rendering</router-link>
   <router-link to="/list-rendering">List Rendering</router-link>
   <router-link to="/lifecycle-template-ref">Lifecycle Template Ref</router-link>
+  <router-link to="/watcher">Watchers</router-link>
   <router-view />
 
 
