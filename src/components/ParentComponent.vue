@@ -5,7 +5,7 @@
         <form>
             <label for="itemId">Item id to find : </label>
             <input type="number" id="itemId" v-model="itemId" placeholder="Type the item id">
-            <button type="button" @click="triggerGetRecordById2ChildMethodCall($event)">Call child componentmethod getRecordById2</button>
+            <button type="button" @click="triggerGetRecordById2ChildMethodCall">Call child componentmethod getRecordById2</button>
         </form>
     </div>
     <span>Send id to child component : {{ itemId }}</span>
