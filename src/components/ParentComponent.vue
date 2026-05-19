@@ -2,10 +2,10 @@
     <h1>{{ pageTitle }}</h1>
 
     <div>
-        <form>
+        <form @submit.prevent="triggerGetRecordById2ChildMethodCall">
             <label for="itemId">Item id to find : </label>
             <input type="number" id="itemId" v-model="itemId" placeholder="Type the item id">
-            <button type="button" @click="triggerGetRecordById2ChildMethodCall">Call child componentmethod getRecordById2</button>
+            <button>Call child componentmethod getRecordById2</button>
         </form>
     </div>
     <span>Send id to child component : {{ itemId }}</span>
@@ -31,9 +31,7 @@
         return route.name;
     });
 
-    const triggerGetRecordById2ChildMethodCall = (e) => {
-        e.preventDefault();
-        // console.log('EVENT :',e);
+    const triggerGetRecordById2ChildMethodCall = () => {
         console.log('Trigger getRecordById2 child component method with id :'+itemId.value);
         if(watcherComponent.value !== undefined) {
             watcherComponent.value.getRecordById2();
