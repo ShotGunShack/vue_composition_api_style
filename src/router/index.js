@@ -65,6 +65,11 @@ const routes = [
         path: '/props',
         name: 'Props',
         component: ParentComponent
+    },
+    {
+        path: '/emits',
+        name: 'Emits',
+        component: ParentComponent
     }
 ];
 
