@@ -104,8 +104,14 @@
 
     watch(taskId, (newVal, oldVal) => {
         console.log('Watcher taskId : new value : '+newVal+" <=> old value : "+oldVal);
-        getRecordById(newVal);
-        getRecordById2();    });
+        if(newVal <= 0) {
+            console.log('Id is negative reset to 0');
+            taskId.value = 0;
+        } else {
+            getRecordById(newVal);
+            getRecordById2();    
+        }
+    });
 
 </script>
 
