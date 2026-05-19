@@ -52,7 +52,7 @@
         getRecordById2
     });
 
-    const currentChildRecord = defineEmits(['child-record-sent-to-parent']);
+    const  currentChildRecordEmit= defineEmits(['child-record-sent-to-parent']);
 
     const getRecords = async () => {
         console.log('Get records...');
@@ -80,7 +80,7 @@
                 //    console.log("Record found : "+r);
                 //    loopThroughObjectProperty(r);
                     record.value = r;
-                    // currentChildRecord("child-record-sent-to-parent", record.value);
+                    // currentChildRecordEmit("child-record-sent-to-parent", record.value);
                 });
             } else {
                 msgErrId.value = "msgErr";
@@ -132,7 +132,7 @@
 
     const sendRecordToParent = () => {
         console.log('Emitting record to parent component : ', record.value);
-        currentChildRecord('child-record-sent-to-parent', record.value);
+        currentChildRecordEmit('child-record-sent-to-parent', record.value);
     }
 
     onMounted(() => {
