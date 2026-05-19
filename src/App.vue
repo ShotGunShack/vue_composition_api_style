@@ -26,6 +26,7 @@
   <router-link to="/lifecycle-template-ref">Lifecycle Template Ref</router-link>
   <router-link to="/watcher">Watchers</router-link>
   <router-link to="/nesting-component">Nesting ChildComponent into ParentComponent</router-link>
+  <router-link to="/props">Props</router-link>
   <router-view />
 
 

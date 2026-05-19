@@ -60,6 +60,11 @@ const routes = [
         path: '/nesting-component',
         name: 'Nesting Component',
         component: ParentComponent
+    },
+    {
+        path: '/props',
+        name: 'Props',
+        component: ParentComponent
     }
 ];
 
