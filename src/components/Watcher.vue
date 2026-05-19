@@ -12,6 +12,7 @@
             <pre v-else-if="httpStatus === 404 || httpStatus === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
             <pre v-else>{{ record }}</pre>
         </div>
+        <button @click="sendRecordToParent">Send this record to parent component</button>
 
         <h2>Simplified use of watchers</h2>
         <div>
@@ -51,6 +52,8 @@
         getRecordById2
     });
 
+    const currentChildRecord = defineEmits(['child-record-sent-to-parent']);
+
     const getRecords = async () => {
         console.log('Get records...');
         const datas = await fetch(`https://jsonplaceholder.typicode.com/todos`);///${todoId.value}
@@ -77,6 +80,7 @@
                 //    console.log("Record found : "+r);
                 //    loopThroughObjectProperty(r);
                     record.value = r;
+                    // currentChildRecord("child-record-sent-to-parent", record.value);
                 });
             } else {
                 msgErrId.value = "msgErr";
@@ -125,6 +129,11 @@
             console.log( 'Object of type => '+objectType+' <=> property : '+p);
         }
     };
+
+    const sendRecordToParent = () => {
+        console.log('Emitting record to parent component : ', record.value);
+        currentChildRecord('child-record-sent-to-parent', record.value);
+    }
 
     onMounted(() => {
         console.log('Fetching records...');
