@@ -131,7 +131,11 @@
     };
 
     const sendRecordToParent = () => {
-        console.log('Emitting record to parent component : ', record.value);
+        console.log(
+            'Emitting record to parent component : ', record.value, 
+            "For record id  :", taskId.value
+        );
+        //Returnrfreshed record value to parent component through emits
         currentChildRecordEmit('child-record-sent-to-parent', record.value);
     }
 
@@ -146,7 +150,19 @@
     watch(taskId, (taskIdnewVal, taskIdoldVal) => {
         console.log('Watcher taskId : new value : '+taskIdnewVal+" <=> old value : "+taskIdoldVal);
         if(taskIdnewVal <= 0) {
-            console.log('TaskId New value is negative reset to 0');
+            // /!\ Important : 
+            // reset httpStatus and record value to avoid displaying 
+            // error message and 
+            // record of previous task id when user click on previous button with task id from 1 to 0
+            httpStatus.value = undefined;
+            record.value = null;
+
+            console.log(
+                'TaskId New value is negative reset to 0',
+                "HTTP STATUS :", httpStatus.value,
+                "RECORD VALUE : ", record.value
+            );
+
             taskId.value = 0;
         } else {
             getRecordById(taskIdnewVal);
