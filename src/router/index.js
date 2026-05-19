@@ -8,6 +8,7 @@ import ConditionnalRendering from '@/components/ConditionnalRendering.vue';
 import ListRendering from '@/components/ListRendering.vue';
 import LifeCycleTemplateRef from '@/components/LifeCycleTemplateRef.vue';
 import Watcher from '@/components/Watcher.vue';
+import ParentComponent from '@/components/ParentComponent.vue';
 
 const routes = [
     {
@@ -54,6 +55,11 @@ const routes = [
         path: '/watcher',
         name: 'Watcher',
         component: Watcher
+    },
+    {
+        path: '/nesting-component',
+        name: 'Nesting Component',
+        component: ParentComponent
     }
 ];
 
