@@ -13,7 +13,8 @@
         <div>
             <h2>Parent component receiving record from child component through emits</h2>
             <pre v-if="!recordFromChild || recordFromChild === undefined">No record from child component received yet</pre>
-            <pre v-else id="childToParentMsg">{{ recordFromChild }}</pre>
+            <!-- <pre v-else :id="{childToParentMsg : isChildRecReceived}">{{ recordFromChild }}</pre> -->
+            <pre v-else :id="childRecReceivedId">{{ recordFromChild }}</pre>
         </div>
 
     </div>
@@ -21,10 +22,7 @@
     <Watcher 
         :idFromParent="itemId" 
         ref="watcherComponent" 
-        @child-record-sent-to-parent="(rec) => {
-            console.log('Record received from child component through emits : ', rec);
-            recordFromChild = rec;
-        }"
+        @child-record-sent-to-parent="getRecordFromChildComponent"
     />
 
 </template>
@@ -43,6 +41,7 @@
     console.log('Watcher component ref : ', watcherComponent.value);
     const recordFromChild = ref();
     const isChildRecReceived = ref(false);
+    const childRecReceivedId = ref();
 
     pageTitle.value = computed(() => { 
         console.log('Current route ===> ', route.path, route.name, route.fullPath);
@@ -54,6 +53,13 @@
         if(watcherComponent.value !== undefined) {
             watcherComponent.value.getRecordById2();
         }
+    }
+
+    const getRecordFromChildComponent = (childRec) => {
+        console.log('Record received from child component through emits : ', childRec);
+        recordFromChild.value = childRec;
+        // isChildRecReceived.value = true;
+        childRecReceivedId.value = 'childToParentMsg';
     }
     
 </script>
