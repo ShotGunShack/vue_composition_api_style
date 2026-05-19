@@ -15,8 +15,12 @@
 
         <h2>Simplified use of watchers</h2>
         <div>
+            <div>
+                <b>Item id received from the parent component : {{ idFromParent }}</b>
+            </div>
             <span>Currently viewed item : {{ taskId }}</span>
             <pre v-if="!record2">No selected item</pre>
+            <pre v-else-if="httpStatus2 === 404 || httpStatus2 === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
             <pre v-else>{{ record2 }}</pre>
         </div>
     </div>
@@ -30,13 +34,20 @@
     import { ref, watch, onMounted } from 'vue';
 
     const records = ref (null);
+    const recordsSize = ref (0);
     const record = ref (null);
     const record2 = ref (null);
-    const recordsSize = ref (0);
     const taskId = ref (0);
     const recordNotFoundErrMsg = ref(null);
     const msgErrId = ref('');
     const httpStatus = ref(undefined);
+    const httpStatus2 = ref(undefined);
+    
+
+    const parentProps = defineProps({
+        idFromParent: Number
+    });
+    const recordIdFromParent = ref(parentProps.idFromParent);
 
     const getRecords = async () => {
         console.log('Get records...');
@@ -48,6 +59,7 @@
 
     const getRecordById = async (id) => {
         console.log('Get record for id : '+id);
+        console.log('ID FROM PARENT COMPONENT : '+recordIdFromParent.value);
         
         const data = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((response) => {
             console.log('Response : '+response);
@@ -57,6 +69,7 @@
             // loopThroughObjectProperty(response);
             
             httpStatus.value = response.status;
+            console.log('HTTP STATUS : '+httpStatus.value);
             if(response.ok) {
                 response.json().then((r) => {
             
@@ -82,8 +95,23 @@
     };
 
     async function getRecordById2() {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${taskId.value}`);
-        record2.value = await response.json();
+        const parentRecordId = () => parentProps.idFromParent;
+        console.log('Get record id from parent component : '+ parentRecordId());
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${parentRecordId()}`);
+        httpStatus2.value = response.status;
+        console.log('HTTP STATUS 2 : '+httpStatus2.value);
+        if(response.ok) {
+            record2.value = await response.json();
+        } else {
+            msgErrId.value = "msgErr";
+            if(response.status === 404) {
+                console.log("No record found for id : "+parentRecordId())
+                recordNotFoundErrMsg.value = "No record found for id : "+parentRecordId();
+            } else {
+                console.log("Error fetching record for id : "+parentRecordId());
+                recordNotFoundErrMsg.value = "Error fetching record for id : "+parentRecordId();
+            }
+        } 
     }
 
     const loopThroughObjectProperty = (obj) => {
@@ -102,14 +130,18 @@
         });
     });
 
-    watch(taskId, (newVal, oldVal) => {
-        console.log('Watcher taskId : new value : '+newVal+" <=> old value : "+oldVal);
-        if(newVal <= 0) {
-            console.log('Id is negative reset to 0');
+    watch([taskId, () => parentProps.idFromParent], ([taskIdnewVal, idFromParentnewVal], [taskIdoldVal, idFromParentoldVal]) => {
+        console.log('Watcher taskId : new value : '+taskIdnewVal+" <=> old value : "+taskIdoldVal);
+        console.log('Watcher PARENT Id : new value : '+idFromParentnewVal+" <=> old value : "+idFromParentoldVal);
+        if(taskIdnewVal <= 0) {
+            console.log('TaskId New value is negative reset to 0');
             taskId.value = 0;
         } else {
-            getRecordById(newVal);
-            getRecordById2();    
+            getRecordById(taskIdnewVal);
+        }
+        
+        if(idFromParentnewVal > 0) {
+            getRecordById2();
         }
     });
 
