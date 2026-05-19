@@ -47,7 +47,9 @@
     const parentProps = defineProps({
         idFromParent: Number
     });
-    const recordIdFromParent = ref(parentProps.idFromParent);
+    defineExpose({
+        getRecordById2
+    });
 
     const getRecords = async () => {
         console.log('Get records...');
@@ -59,7 +61,6 @@
 
     const getRecordById = async (id) => {
         console.log('Get record for id : '+id);
-        console.log('ID FROM PARENT COMPONENT : '+recordIdFromParent.value);
         
         const data = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`).then((response) => {
             console.log('Response : '+response);
@@ -97,9 +98,12 @@
     async function getRecordById2() {
         const parentRecordId = () => parentProps.idFromParent;
         console.log('Get record id from parent component : '+ parentRecordId());
+
         const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${parentRecordId()}`);
+        
         httpStatus2.value = response.status;
         console.log('HTTP STATUS 2 : '+httpStatus2.value);
+        
         if(response.ok) {
             record2.value = await response.json();
         } else {
@@ -130,9 +134,8 @@
         });
     });
 
-    watch([taskId, () => parentProps.idFromParent], ([taskIdnewVal, idFromParentnewVal], [taskIdoldVal, idFromParentoldVal]) => {
+    watch(taskId, (taskIdnewVal, taskIdoldVal) => {
         console.log('Watcher taskId : new value : '+taskIdnewVal+" <=> old value : "+taskIdoldVal);
-        console.log('Watcher PARENT Id : new value : '+idFromParentnewVal+" <=> old value : "+idFromParentoldVal);
         if(taskIdnewVal <= 0) {
             console.log('TaskId New value is negative reset to 0');
             taskId.value = 0;
@@ -140,9 +143,6 @@
             getRecordById(taskIdnewVal);
         }
         
-        if(idFromParentnewVal > 0) {
-            getRecordById2();
-        }
     });
 
 </script>
