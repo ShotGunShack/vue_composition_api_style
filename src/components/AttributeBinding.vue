@@ -24,6 +24,11 @@
 
 <script setup>
     import { ref } from 'vue';
+    import { useRoute} from 'vue-router';
+
+    const route = useRoute();
+    //Change the title of the page to the name of the route
+    document.title = route.name;
 
     const titleClass = ref('title');
     const definitionClass = ref('definition');

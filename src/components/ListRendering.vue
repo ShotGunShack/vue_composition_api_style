@@ -64,6 +64,11 @@
 
 <script setup>
     import { ref, computed } from 'vue';
+    import { useRoute } from 'vue-router'; 
+
+    const route = useRoute();
+    //Change the title of the page to the name of the route
+    document.title = route.name;
 
     const todoId = ref(0);
     const newTask = ref(null);

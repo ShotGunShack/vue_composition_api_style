@@ -35,6 +35,11 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+//Change the title of the page to the name of the route
+document.title = route.name;
 
 const counter = reactive({
     count: 0
@@ -46,5 +51,8 @@ const reactiveFalsy = reactive('test reactive falsy');
 //ref can take any type of value
 const message = ref("Reactive property using ref");
 const myCounter = ref(0);
+
+
+
 
 </script>

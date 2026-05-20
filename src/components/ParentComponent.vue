@@ -53,6 +53,8 @@
 
     pageTitle.value = computed(() => { 
         console.log('Current route ===> ', route.path, route.name, route.fullPath);
+        //Change the title of the page to the name of the route
+        document.title = route.name;
         return route.name;
     });
 

@@ -21,6 +21,11 @@
 <script setup>
 
     import { ref, onMounted } from 'vue';
+    import { useRoute } from 'vue-router'; 
+
+    const route = useRoute();
+    //Change the title of the page to the name of the route
+    document.title = route.name;
 
     const pElmtRef = ref(null);
 

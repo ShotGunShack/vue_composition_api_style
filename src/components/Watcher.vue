@@ -55,6 +55,11 @@
 <script setup>
 
     import { ref, watch, onMounted } from 'vue';
+    import { useRoute } from 'vue-router'; 
+
+    const route = useRoute();
+    //Change the title of the page to the name of the route
+    document.title = route.name;
 
     const records = ref (null);
     const recordsSize = ref (0);
