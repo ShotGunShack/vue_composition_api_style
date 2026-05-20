@@ -26,6 +26,21 @@
         </div>
     </div>
 
+    <h2>Addition of a Template Fragment using Slots</h2>
+    <button @click="toggleSlotFragment = !toggleSlotFragment; console.log(toggleSlotFragment)">Toggle Slot Fragment</button>
+    <div>
+        <div v-if="toggleSlotFragment">
+            <slot>
+                No Template Fragment Slot received yet
+            </slot>
+        </div>
+        
+        <div v-else>
+            No Template Fragment Slot rendered yet
+        </div>
+    </div>
+
+
 </template>
 
 
@@ -51,6 +66,7 @@
     defineExpose({
         getRecordById2
     });
+    const toggleSlotFragment = ref(false);
 
     const  currentChildRecordEmit= defineEmits(['child-record-sent-to-parent']);
 

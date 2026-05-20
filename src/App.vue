@@ -28,6 +28,7 @@
   <router-link to="/nesting-component">Nesting ChildComponent into ParentComponent</router-link>
   <router-link to="/props">Props</router-link>
   <router-link to="/Emits">Emits</router-link>
+  <router-link to="/Slots">Slots</router-link>
   <router-view />
 
 

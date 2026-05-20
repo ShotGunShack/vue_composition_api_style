@@ -70,6 +70,11 @@ const routes = [
         path: '/emits',
         name: 'Emits',
         component: ParentComponent
+    },
+    {
+        path: '/slots',
+        name: 'Slots',
+        component: ParentComponent
     }
 ];
 
