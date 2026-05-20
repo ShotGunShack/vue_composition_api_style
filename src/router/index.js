@@ -9,6 +9,7 @@ import ListRendering from '@/components/ListRendering.vue';
 import LifeCycleTemplateRef from '@/components/LifeCycleTemplateRef.vue';
 import Watcher from '@/components/Watcher.vue';
 import ParentComponent from '@/components/ParentComponent.vue';
+import NextStep from '@/components/NextStep.vue';
 
 const routes = [
     {
@@ -75,6 +76,11 @@ const routes = [
         path: '/slots',
         name: 'Slots',
         component: ParentComponent
+    },
+    {
+        path: '/next-step',
+        name: 'Next Step',
+        component: NextStep
     }
 ];
 

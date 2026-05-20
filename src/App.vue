@@ -16,20 +16,21 @@
     <TheWelcome />
   </main> -->
 
-  <router-link to="/">Home</router-link>
-  <router-link to="/declarative-rendering">Declarative Rendering</router-link>
-  <router-link to="/attribute-binding">Attribute Binding</router-link>
-  <router-link to="/event-listeners">Event Listeners</router-link>
-  <router-link to="/two-way-bindings">Two Way Bindings</router-link>
-  <router-link to="/conditionnal-rendering">Conditionnal Rendering</router-link>
-  <router-link to="/list-rendering">List Rendering</router-link>
-  <router-link to="/lifecycle-template-ref">Lifecycle Template Ref</router-link>
-  <router-link to="/watcher">Watchers</router-link>
-  <router-link to="/nesting-component">Nesting ChildComponent into ParentComponent</router-link>
-  <router-link to="/props">Props</router-link>
-  <router-link to="/Emits">Emits</router-link>
-  <router-link to="/Slots">Slots</router-link>
-  <router-view />
+    <router-link to="/">Home</router-link>
+    <router-link to="/declarative-rendering">Declarative Rendering</router-link>
+    <router-link to="/attribute-binding">Attribute Binding</router-link>
+    <router-link to="/event-listeners">Event Listeners</router-link>
+    <router-link to="/two-way-bindings">Two Way Bindings</router-link>
+    <router-link to="/conditionnal-rendering">Conditionnal Rendering</router-link>
+    <router-link to="/list-rendering">List Rendering</router-link>
+    <router-link to="/lifecycle-template-ref">Lifecycle Template Ref</router-link>
+    <router-link to="/watcher">Watchers</router-link>
+    <router-link to="/nesting-component">Nesting ChildComponent into ParentComponent</router-link>
+    <router-link to="/props">Props</router-link>
+    <router-link to="/Emits">Emits</router-link>
+    <router-link to="/Slots">Slots</router-link>
+    <router-link to="/next-step">Next Step</router-link>
+    <router-view />
 
 
 </template>
