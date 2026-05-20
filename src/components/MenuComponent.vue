@@ -49,20 +49,50 @@
 
 <style scoped>
 
-    ul {
-        display: flex;
-        justify-content: center;
-        gap: 1em;
-        list-style-type: none;
-        font-size: large;
-    }
+    @media(min-width: 2560px) {
+      ul {
+          display: flex;
+          justify-content: center;
+          gap: 1em;
+          list-style-type: none;
+          font-size: large;
+          padding: 1em 0 2em 0;
+      }
 
-    li {
-        cursor: pointer;
-        border : 1px groove #44dab9;
-        border-radius: 5px;
-        padding: 0.5em;
-        
+      li {
+          cursor: pointer;
+          border : 1px groove #44dab9;
+          border-radius: 5px;
+          padding: 0.5em;
+      }
+
+    }
+    
+    @media (min-width: 768px) and (max-width: 1366px) {
+        ul {
+          margin: 1em auto;
+          display: flex;
+          justify-content: center;
+          /* max-width: 1366px; */
+          /* flex-wrap: wrap; */
+          gap: 0.5em;
+          list-style-type: none;
+          /* font-size: large; */
+          padding: 1em 0 2em 0;
+          line-height: 21px;
+      }
+
+      li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          border : 1px groove #44dab9;
+          border-radius: 5px;
+          padding: 2px 7px;
+          text-align: center;
+      }
+      
     }
 
     li:hover {
@@ -70,11 +100,13 @@
         font-weight: 600;
         transition: 4s;
     }
-    
+
     a {
         text-decoration: none;
         color: hsla(160, 100%, 37%, 1);
         font-weight: lighter;
     }
+
+    
 
 </style>
