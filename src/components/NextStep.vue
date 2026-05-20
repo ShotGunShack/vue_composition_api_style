@@ -8,7 +8,7 @@
     // execute  npm install js-confetti to import it like that
     // import JSConfetti from 'js-confetti';
     //Alternative filthy solution  
-    // import JSConfetti from 'https://cdn.jsdelivr.net/npm/js-confetti/+esm'
+    import JSConfetti from 'https://cdn.jsdelivr.net/npm/js-confetti/+esm'
 
     const confetti = new JSConfetti();
 
