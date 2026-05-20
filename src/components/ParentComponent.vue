@@ -23,13 +23,16 @@
         :idFromParent="itemId" 
         ref="watcherComponent" 
         @child-record-sent-to-parent="getRecordFromChildComponent"
-    />
+    >
+        <SlotComponent />
+    </Watcher>
 
 </template>
 
 <script setup>
 
     import Watcher from './Watcher.vue';
+    import SlotComponent from './SlotComponent.vue';
     import { useRoute } from 'vue-router';
     import { ref, computed } from 'vue';
 
