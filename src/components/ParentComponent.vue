@@ -1,32 +1,37 @@
 <template>
-    <h1>{{ pageTitle }}</h1>
+    <main id="main-content">
 
-    <div>
-        <form @submit.prevent="triggerGetRecordById2ChildMethodCall">
-            <label for="itemId">Item id to find : </label>
-            <input type="number" id="itemId" v-model="itemId" placeholder="Type the item id">
-            <button>Call child componentmethod getRecordById2</button>
-        </form>
     
-        <span>Send id to child component : {{ itemId }}</span>
-        
+        <h1>{{ pageTitle }}</h1>
         <div>
-            <h2>Parent component receiving record from child component through emits</h2>
-            <pre v-if="!recordFromChild || recordFromChild === undefined">No record from child component received yet</pre>
-            <!-- <pre v-else :id="{childToParentMsg : isChildRecReceived}">{{ recordFromChild }}</pre> -->
-            <pre v-else :id="childRecReceivedId">{{ recordFromChild }}</pre>
+        
+            <div>
+                <form @submit.prevent="triggerGetRecordById2ChildMethodCall">
+                    <label for="itemId">Item id to find : </label>
+                    <input type="number" id="itemId" v-model="itemId" placeholder="Type the item id">
+                    <button>Call child componentmethod getRecordById2</button>
+                </form>
+            
+                <span>Send id to child component : {{ itemId }}</span>
+                
+                <div>
+                    <h2>Parent component receiving record from child component through emits</h2>
+                    <pre v-if="!recordFromChild || recordFromChild === undefined">No record from child component received yet</pre>
+                    <!-- <pre v-else :id="{childToParentMsg : isChildRecReceived}">{{ recordFromChild }}</pre> -->
+                    <pre v-else :id="childRecReceivedId">{{ recordFromChild }}</pre>
+                </div>
+
+            </div>
+
+            <Watcher 
+                :idFromParent="itemId" 
+                ref="watcherComponent" 
+                @child-record-sent-to-parent="getRecordFromChildComponent"
+            >
+                <SlotComponent />
+            </Watcher>
         </div>
-
-    </div>
-
-    <Watcher 
-        :idFromParent="itemId" 
-        ref="watcherComponent" 
-        @child-record-sent-to-parent="getRecordFromChildComponent"
-    >
-        <SlotComponent />
-    </Watcher>
-
+    </main>
 </template>
 
 <script setup>

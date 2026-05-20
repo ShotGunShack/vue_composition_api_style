@@ -1,44 +1,51 @@
 <template>
-    <h1>Watchers</h1>
-    <div>
-        <span ref="recordsSize">No records</span>
-    </div>
-    <div>
-        <button @click="++taskId">Next Task</button>
-        <button @click="--taskId">Previous Task</button>
-        <div>
-            <span>Currently viewed item : {{ taskId }}</span>
-            <pre v-if="!record && httpStatus === undefined">No selected item</pre>
-            <pre v-else-if="httpStatus === 404 || httpStatus === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
-            <pre v-else>{{ record }}</pre>
-        </div>
-        <button @click="sendRecordToParent">Send this record to parent component</button>
 
-        <h2>Simplified use of watchers</h2>
+    <main id="main-content">
+       
+        <h1>Watchers</h1>
         <div>
-            <div>
-                <b>Item id received from the parent component : {{ idFromParent }}</b>
-            </div>
-            <span>Currently viewed item : {{ taskId }}</span>
-            <pre v-if="!record2">No selected item</pre>
-            <pre v-else-if="httpStatus2 === 404 || httpStatus2 === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
-            <pre v-else>{{ record2 }}</pre>
-        </div>
-    </div>
-
-    <h2>Addition of a Template Fragment using Slots</h2>
-    <button @click="toggleSlotFragment = !toggleSlotFragment; console.log(toggleSlotFragment)">Toggle Slot Fragment</button>
-    <div>
-        <div v-if="toggleSlotFragment">
-            <slot>
-                No Template Fragment Slot received yet
-            </slot>
-        </div>
         
-        <div v-else>
-            No Template Fragment Slot rendered yet
+            <div>
+                <span ref="recordsSize">No records</span>
+            </div>
+            <div>
+                <button @click="++taskId">Next Task</button>
+                <button @click="--taskId">Previous Task</button>
+                <div>
+                    <span>Currently viewed item : {{ taskId }}</span>
+                    <pre v-if="!record && httpStatus === undefined">No selected item</pre>
+                    <pre v-else-if="httpStatus === 404 || httpStatus === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
+                    <pre v-else>{{ record }}</pre>
+                </div>
+                <button @click="sendRecordToParent">Send this record to parent component</button>
+
+                <h2>Simplified use of watchers</h2>
+                <div>
+                    <div>
+                        <b>Item id received from the parent component : {{ idFromParent }}</b>
+                    </div>
+                    <span>Currently viewed item : {{ taskId }}</span>
+                    <pre v-if="!record2">No selected item</pre>
+                    <pre v-else-if="httpStatus2 === 404 || httpStatus2 === 500" :id="msgErrId">{{recordNotFoundErrMsg}}</pre>
+                    <pre v-else>{{ record2 }}</pre>
+                </div>
+            </div>
+
+            <h2>Addition of a Template Fragment using Slots</h2>
+            <button @click="toggleSlotFragment = !toggleSlotFragment; console.log(toggleSlotFragment)">Toggle Slot Fragment</button>
+            <div>
+                <div v-if="toggleSlotFragment">
+                    <slot>
+                        No Template Fragment Slot received yet
+                    </slot>
+                </div>
+                
+                <div v-else>
+                    No Template Fragment Slot rendered yet
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
 
 </template>

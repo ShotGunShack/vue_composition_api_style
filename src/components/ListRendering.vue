@@ -1,59 +1,65 @@
 <template>
-    <h1>List Rendering</h1>
-    <h2>Tasks list</h2>
-    <ol>
-        <li v-for="todo in computedTasks" :key="todo.id">
-            <input type="checkbox" v-model="todo.isCompleted" />
-            <span :class="{strikeThrough : todo.isCompleted}" >{{ todo.text }}</span>  <!--=> {{ todo.id }} -->
-            <button @click="removeTask(todo.id)">Remove task</button>
-        </li>
-    </ol>
+    <main id="main-content">
+    
+        <h1>List Rendering</h1>
+        <div>
+        
+            <h2>Tasks list</h2>
+            <ol>
+                <li v-for="todo in computedTasks" :key="todo.id">
+                    <input type="checkbox" v-model="todo.isCompleted" />
+                    <span :class="{strikeThrough : todo.isCompleted}" >{{ todo.text }}</span>  <!--=> {{ todo.id }} -->
+                    <button @click="removeTask(todo.id)">Remove task</button>
+                </li>
+            </ol>
 
-    <input type="text" placeholder="Add a task" v-model="newTask" />
-    <span v-if="isNewTaskEmpty" :class="newTaskErrMsgClass">{{ newTaskErrMsg }}</span>
+            <input type="text" placeholder="Add a task" v-model="newTask" />
+            <span v-if="isNewTaskEmpty" :class="newTaskErrMsgClass">{{ newTaskErrMsg }}</span>
 
-    <div>
-        <button @click="addTask">Add task</button>
-        <button @click="hideCompletedTasks = !hideCompletedTasks">
-            {{ hideCompletedTasks ? 'Show all' : 'Hide completed' }}
-        </button>
-    </div>
+            <div>
+                <button @click="addTask">Add task</button>
+                <button @click="hideCompletedTasks = !hideCompletedTasks">
+                    {{ hideCompletedTasks ? 'Show all' : 'Hide completed' }}
+                </button>
+            </div>
 
-    <h2>List Rendering Definition</h2>
-    <p id="description">We can use the v-for directive to render a list of items based on an array. 
-        The v-for directive requires a special syntax in the form of item in items, 
-        where items is the source data array and item is an alias for the array element being iterated on:</p>
+            <h2>List Rendering Definition</h2>
+            <p id="description">We can use the v-for directive to render a list of items based on an array. 
+                The v-for directive requires a special syntax in the form of item in items, 
+                where items is the source data array and item is an alias for the array element being iterated on:</p>
 
-    <div class="code">
-        <code>
-            <span style="color:#F97583;">const</span>
-            <span style="color:#79B8FF;"> items</span>
-            <span style="color:#F97583;"> =</span>
-            <span style="color:#B392F0;"> ref</span>
-            <span style="color:#E1E4E8;">([{ message: </span><span style="color:#9ECBFF;">'Foo'</span>
-            <span style="color:#E1E4E8;"> }, { message: </span>
-            <span style="color:#9ECBFF;">'Bar'</span><span style="color:#E1E4E8;"> }])</span>
-        </code>
-    </div>
-    <br/>
-    <div class="code">
-        <code>
-            <span style="color:#E1E4E8;">&lt;</span>
-            <span style="color:#85E89D;">li</span>
-            <span style="color:#B392F0;"> v-for</span>
-            <span style="color:#E1E4E8;">=</span>
-            <span style="color:#9ECBFF;">"</span>
-            <span style="color:#E1E4E8;">item </span>
-            <span style="color:#F97583;">in</span>
-            <span style="color:#E1E4E8;"> items</span>
-            <span style="color:#9ECBFF;">"</span>
-            <span style="color:#E1E4E8;">&gt;</span>
-            <span style="color:#E1E4E8;">  &#123;&#123; item.message &#125;&#125;</span>
-            <span style="color:#E1E4E8;">&lt;/</span>
-            <span style="color:#85E89D;">li</span>
-            <span style="color:#E1E4E8;">&gt;</span>
-        </code>
-    </div>
+            <div class="code">
+                <code>
+                    <span style="color:#F97583;">const</span>
+                    <span style="color:#79B8FF;"> items</span>
+                    <span style="color:#F97583;"> =</span>
+                    <span style="color:#B392F0;"> ref</span>
+                    <span style="color:#E1E4E8;">([{ message: </span><span style="color:#9ECBFF;">'Foo'</span>
+                    <span style="color:#E1E4E8;"> }, { message: </span>
+                    <span style="color:#9ECBFF;">'Bar'</span><span style="color:#E1E4E8;"> }])</span>
+                </code>
+            </div>
+            <br/>
+            <div class="code">
+                <code>
+                    <span style="color:#E1E4E8;">&lt;</span>
+                    <span style="color:#85E89D;">li</span>
+                    <span style="color:#B392F0;"> v-for</span>
+                    <span style="color:#E1E4E8;">=</span>
+                    <span style="color:#9ECBFF;">"</span>
+                    <span style="color:#E1E4E8;">item </span>
+                    <span style="color:#F97583;">in</span>
+                    <span style="color:#E1E4E8;"> items</span>
+                    <span style="color:#9ECBFF;">"</span>
+                    <span style="color:#E1E4E8;">&gt;</span>
+                    <span style="color:#E1E4E8;">  &#123;&#123; item.message &#125;&#125;</span>
+                    <span style="color:#E1E4E8;">&lt;/</span>
+                    <span style="color:#85E89D;">li</span>
+                    <span style="color:#E1E4E8;">&gt;</span>
+                </code>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script setup>
@@ -111,7 +117,7 @@
     });
 </script>
 
-<style>
+<style scoped>
     .errorTaskMsg {
         color: red;
         padding: 5px;
